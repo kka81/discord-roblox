@@ -1,0 +1,17 @@
+name: Update Banlist
+on:
+  workflow_dispatch:
+
+jobs:
+  push-banlist:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Commit banlist
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add banlist.json
+          git commit -m "Update banlist from bot" || echo "No changes to commit"
+          git push origin main
